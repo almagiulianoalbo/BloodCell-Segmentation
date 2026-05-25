@@ -63,7 +63,32 @@ def segmentar_celulas(imagen_original, imagen_preprocesada):
 
     # Bordes del watershed en rojo
     imagen_watershed[marcadores == -1] = [0, 0, 255]
+    # Máscara final limpia
+    mascara_final = apertura.copy()
 
+    # Obtener regiones segmentadas individuales
+    regiones = []
+
+    for etiqueta in np.unique(marcadores):
+
+        # Ignorar fondo y bordes
+        if etiqueta <= 1:
+            continue
+
+        mascara = np.zeros(imagen_original.shape[:2], dtype="uint8")
+        mascara[marcadores == etiqueta] = 255
+
+        regiones.append(mascara)
+
+    return (
+        thresh,
+        apertura,
+        distancia,
+        marcadores,
+        imagen_watershed,
+        mascara_final,
+        regiones
+    )
     return thresh, apertura, distancia, marcadores, imagen_watershed
 
 '''Este archivo contiene la segmentación y separación de células.
@@ -76,4 +101,12 @@ Distance Transform: detecta los centros de las células midiendo distancia a los
 Connected Components: asigna etiquetas a cada región detectada.
 Watershed: separa células pegadas o superpuestas generando fronteras entre ellas.
 
-Finalmente, los bordes detectados se marcan en rojo sobre la imagen original.'''
+Finalmente, los bordes detectados se marcan en rojo sobre la imagen original.
+
+segmentacion_watershed.jpg: imagen final con bordes rojos del watershed.
+mascara_final.jpg: máscara binaria limpia para que tu compañera use como base.
+region_0.jpg, region_1.jpg, etc.: regiones/células separadas individualmente.
+
+'''
+
+

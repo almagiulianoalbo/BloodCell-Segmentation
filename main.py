@@ -60,12 +60,26 @@ def main():
 
     gris, blur, ecualizada = preprocesar_imagen(imagen_original)
 
-    thresh, apertura, distancia, marcadores, imagen_watershed = segmentar_celulas(
+    (
+        thresh,
+        apertura,
+        distancia,
+        marcadores,
+        imagen_watershed,
+        mascara_final,
+        regiones
+    ) = segmentar_celulas(
         imagen_original,
         ecualizada
     )
 
     cv2.imwrite("outputs/segmentacion_watershed.jpg", imagen_watershed)
+
+    cv2.imwrite("outputs/mascara_final.jpg", mascara_final)
+
+    # Guardar regiones individuales
+    for i, region in enumerate(regiones):
+        cv2.imwrite(f"outputs/region_{i}.jpg", region)
 
     mostrar_resultados(
         imagen_original,
