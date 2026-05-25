@@ -38,7 +38,7 @@ def segmentar_celulas(imagen_original, imagen_preprocesada):
     # Primer plano seguro
     _, primer_plano = cv2.threshold(
         distancia,
-        0.4 * distancia.max(),
+        0.55 * distancia.max(),
         255,
         0
     )

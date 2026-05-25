@@ -19,7 +19,7 @@ def preprocesar_imagen(imagen):
     blur = cv2.GaussianBlur(gris, (5, 5), 0)
 
     # Mejora de contraste
-    ecualizada = cv2.equalizeHist(blur)
+    ecualizada = blur
 
     return gris, blur, ecualizada
 

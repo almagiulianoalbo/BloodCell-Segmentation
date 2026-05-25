@@ -1,9 +1,8 @@
 import cv2
 import matplotlib.pyplot as plt
 
-from preprocessing import cargar_imagen, preprocesar_imagen
-from segmentation import segmentar_celulas
-
+from logica.preprocessing import cargar_imagen, preprocesar_imagen
+from logica.segmentation import segmentar_celulas
 
 '''Significado de las imágenes mostradas
 Imagen original: imagen microscópica real.
@@ -55,7 +54,7 @@ def mostrar_resultados(imagen_original, gris, blur, ecualizada, thresh, apertura
 
 
 def main():
-    ruta_imagen = "data/train/original/0a3b53c7-e7ab-4135-80aa-fd2079d727d6.jpg"
+    ruta_imagen = "data/train/original/0f26699f-a776-4424-b092-27da9a1d12e2.png"
 
     imagen_original = cargar_imagen(ruta_imagen)
 
